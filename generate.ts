@@ -1,4 +1,4 @@
-import { parse } from "https://deno.land/std@0.88.0/flags/mod.ts";
+import { parse } from './deps.ts';
 import { object2css } from './mod.ts';
 
 function displayHelp() {

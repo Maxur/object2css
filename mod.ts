@@ -4,6 +4,12 @@ interface Prop {
   [key: string]: Prop | string | number;
 }
 
+function kebabCase(str: string) {
+  return (str.match(/(?:[A-Z0-9]+|(?:[A-Z]?[a-z0-9]+))(?=[A-Z _-]|\b)/g) || [])
+    .join('-')
+    .toLowerCase();
+}
+
 function loop<T>(array: T[], fn: (value: T) => Prop) {
   return array.reduce((acc, a) => ({
     ...acc,
@@ -23,7 +29,7 @@ function object2css(obj: Record<string, Prop>) {
         const p = prop[0] === PARENT_CHAR ? `${selector}${prop.slice(1)}` : `${selector} ${prop}`;
         subSelectors.push({ [p]: value });
       } else {
-        css += `${prop}:${value};`;
+        css += `${kebabCase(prop)}:${value};`;
       }
     }
     css += '}';
@@ -34,4 +40,4 @@ function object2css(obj: Record<string, Prop>) {
   return css;
 }
 
-export { object2css, loop };
+export { kebabCase, loop, object2css };

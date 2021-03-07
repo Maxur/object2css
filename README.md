@@ -32,13 +32,13 @@ export default {
   },
   '.main': {
     margin: `${1/2}rem`, // Computed property
-    ...loop(['top', 'bottom'], (k) => ({ // Loop helper
-      [`border-${k}`]: '1px solid #aaa',
+    ...loop(['left', 'right'], (k) => ({ // Loop helper
+      textAlign: k,
     })),
     '.test': { // Will create a ".main .test" selector
       color: '#f55',
       '&.center': { // The character '&' allows you to combine with the parent selector ".main .test.center"
-        'text-align': 'center',
+        textAlign: 'center',
       },
     },
   },
@@ -53,8 +53,8 @@ html, body {
 
 .main {
   margin: 0.5rem;
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
+  text-align: left;
+  text-align: right;
 }
 
 .main .test {
